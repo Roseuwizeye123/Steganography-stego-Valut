@@ -1,0 +1,308 @@
+# StegoVault
+
+## Secure Image Steganography Platform
+
+StegoVault is a modern web-based steganography application that enables users to securely hide and extract secret messages inside digital images using multiple Least Significant Bit (LSB) embedding techniques.
+
+The platform provides a user-friendly interface for encoding confidential text into images and decoding hidden messages from stego-images. It supports several steganographic profiles, channel-based embedding methods, and optional password-based XOR encryption for enhanced security.
+
+---
+
+## Features
+
+### Message Encoding
+
+* Hide secret text inside image files.
+* Generate stego-images without visible image distortion.
+* Support for multiple steganographic algorithms.
+
+### Message Decoding
+
+* Extract hidden messages from stego-images.
+* Recover encrypted messages using the correct password.
+* Validate profile-based extraction methods.
+
+### Security Profiles
+
+| Key ID | Method           | Description                                        |
+| ------ | ---------------- | -------------------------------------------------- |
+| K1     | LSB-1 Classic    | Standard 1-bit LSB embedding                       |
+| K2     | LSB-2 Dual Bit   | Uses 2 LSBs per channel for higher capacity        |
+| K3     | LSB-4 Quad Bit   | Uses 4 LSBs per channel for maximum payload        |
+| K4     | Red Channel      | Embeds data only in the Red channel                |
+| K5     | Green Channel    | Embeds data only in the Green channel              |
+| K6     | Blue Channel     | Embeds data only in the Blue channel               |
+| K7     | Alpha Channel    | Embeds data in transparency information            |
+| K8     | XOR Cipher + LSB | Password-protected XOR encryption before embedding |
+
+### Modern User Interface
+
+* Responsive React frontend.
+* Real-time image preview.
+* Simple drag-and-drop image upload workflow.
+* Dark-themed cybersecurity-inspired design.
+
+---
+
+## System Architecture
+
+### Frontend
+
+Built using:
+
+* React.js
+* Vite
+* Tailwind CSS
+* Lucide React Icons
+
+Frontend Responsibilities:
+
+* User interaction
+* Image upload
+* Secret message input
+* Profile selection
+* Result visualization
+* Communication with backend APIs
+
+### Backend
+
+Built using:
+
+* Node.js
+* Express.js
+* Multer
+* Sharp
+* CORS
+
+Backend Responsibilities:
+
+* Image processing
+* Steganographic encoding
+* Message extraction
+* XOR encryption/decryption
+* API management
+
+---
+
+## Project Structure
+
+```text
+stego-master/
+│
+├── backend/
+│   ├── server.js
+│   ├── package.json
+│   ├── uploads/
+│   └── utils/
+│       └── stegoEngine.js
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── assets/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+│
+└── package.json
+```
+
+---
+
+## How Encoding Works
+
+1. User uploads a cover image.
+2. User enters a secret message.
+3. User selects a steganographic profile.
+4. Optional password encryption is applied for K8.
+5. Message is converted into binary format.
+6. Binary bits are embedded into image pixels.
+7. A stego-image is generated and returned.
+
+---
+
+## How Decoding Works
+
+1. User uploads a stego-image.
+2. User selects the correct profile.
+3. User enters password if encryption was used.
+4. Binary data is extracted from image pixels.
+5. Hidden message is reconstructed.
+6. Original text is displayed.
+
+---
+
+## API Endpoints
+
+### Health Check
+
+```http
+GET /api/stego/health
+```
+
+Response:
+
+```json
+{
+  "status": "online",
+  "module": "StegoVault Processing Core Engine"
+}
+```
+
+---
+
+### Encode Message
+
+```http
+POST /api/stego/encode
+```
+
+Form Data:
+
+```text
+image
+message
+keyId
+password
+```
+
+Returns:
+
+```text
+Encoded PNG image
+```
+
+---
+
+### Decode Message
+
+```http
+POST /api/stego/decode
+```
+
+Form Data:
+
+```text
+image
+keyId
+password
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "message": "Hidden Secret Message"
+}
+```
+
+---
+
+## Installation
+
+### Clone Repository
+
+
+
+---
+
+### Backend Setup
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+Backend runs on:
+
+```text
+http://localhost:5174
+```
+
+---
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Technologies Used
+
+### Frontend
+
+* React.js
+* Vite
+* Tailwind CSS
+* JavaScript (ES6+)
+
+### Backend
+
+* Node.js
+* Express.js
+* Multer
+* Sharp
+* CORS
+
+### Security Techniques
+
+* Least Significant Bit (LSB) Steganography
+* XOR Encryption
+* Channel-Based Pixel Embedding
+* Binary Payload Framing
+
+---
+
+## Current MVP Capabilities
+
+✔ Encode text into images
+
+✔ Decode hidden text from images
+
+✔ Multiple embedding profiles
+
+✔ Password-protected hiding (K8)
+
+✔ Modern responsive interface
+
+✔ PNG output generation
+
+✔ Image preview functionality
+
+✔ Backend API architecture
+
+---
+
+## Future Improvements
+
+* AES Encryption Support
+* User Authentication
+* Secure Key Management
+* File Steganography
+* Audio Steganography
+* Video Steganography
+* Capacity Calculator
+* Image Difference Analysis
+* Steganalysis Detection Module
+* Cloud Storage Integration
+* Activity Logs
+* Export Reports
+
+---
+
+
